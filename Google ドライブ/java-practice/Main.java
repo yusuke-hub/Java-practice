@@ -1,21 +1,19 @@
 public class Main {
   public static void main(final String[] args) {
 
-    // while
-    // 条件判定が前
+    // for
+    // ある処理を指定した回数繰り返す
     // 0 - 9
-    int i = 0;
-    // while (i < 10) {
-    // System.out.println(i);
-    // i++;
-    // }
-
-    // do - while
-    // 条件判定が後
-    do {
+    // break
+    // ループ処理を完全に停止する
+    // continue
+    // 指定した条件のみ、処理を飛ばして、処理を全て実行する
+    for (int i = 0; i < 10; i++) {
+      if (i == 5) {
+        // break;
+        continue;
+      }
       System.out.println(i);
-      i++;
-    } while (i < 10);
+    }
   }
-
 }
