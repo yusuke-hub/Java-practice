@@ -1,60 +1,30 @@
-// 親クラス スーパークラス
+// static
+// インスタンス化しなくても直接使えるフィールドやメソッドを定義できる
+
 class User {
-  String name;
+  private String name;
+  private static int count = 0;
 
-  // constructor
-  User(String name) {
+  public User(String name, int score) {
     this.name = name;
+    // staticを定義したクラス変数は先頭にクラス名をつける事でアクセスできる
+    User.count++;
   }
 
-  void sayHi() {
-    System.out.println("hi! " + this.name);
+  public static void getInfo() {
+    System.out.println("# of instances:" + User.count);
   }
-}
 
-// 子クラス サブクラス
-class AdminUser extends User {
-  AdminUser(String name) {
-    super(name);
-  }
-  
-  void sayHello() {
-    System.out.println("hello! " + this.name);
-  }
-  
-  // override
-  // @Overrideでoverrideを明示的に示す
-  // annotationと呼ぶ
-  @Override void sayHi() {
-    System.out.println("[admin]hi! " + this.name);
-  }
 }
 
 public class MyApp {
 
   public static void main(String[] args) {
-    User tom = new User("tom");
-    System.out.println(tom.name);
-    tom.sayHi();
-
-    AdminUser bob = new AdminUser("bob");
-    System.out.println(bob.name);
-    bob.sayHello();
+    User.getInfo();
+    User tom = new User("tom", 85);
+    User.getInfo();
+    User bob = new User("bob", -21);
+    User.getInfo();
   }
 
 }
-
-// パッケージ
-// 関連するクラスをまとめたり、名前の衝突を避ける事ができる
-// 名前は組織のドメインを逆にしたものを使う事が推奨されている
-
-// アクセス修飾子
-// クラスやそのメンバーがどこからアクセス可能であるかを決定する
-  // public
-    // どこからでもアクセス可能
-  // package private = アクセス修飾子を何もつけない
-    // 同じパッケージからのみ、アクセス可能
-  // private
-    // 同じクラスからのみ呼び出せる
-  // protected
-    // 別のパッケージであっても、当該クラスのサブクラスからならアクセス可能
