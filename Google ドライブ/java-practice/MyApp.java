@@ -1,18 +1,18 @@
 public class MyApp {
 
-  // メソッド名の前のvoidは「何も値を返さないよ」という意味
-  // public static void sayHi(String name) {
+  // sayHiメソッド内の変数xはmainメソッド内では使用できない
+  public static void sayHi(String name) {
+    // int x = 10;
+    System.out.println("Hi!" + name);
+  }
 
-  // メソッドが値を返す時は、メソッド名の前に、その返すデータの方を書かないといけない
-  public static String sayHi(String name) {
-
-    // System.out.println("Hi!" + name);
-    return "Hi!" + name;
+  // Overload
+  // 引数なしのsayHiを定義する
+  public static void sayHi() {
+    System.out.println("Hi! Nobody!");
   }
 
   public static void main(final String[] args) {
-    // sayHi("Yusuke");
-    String msg = sayHi("Taiko");
-    System.out.println(msg);
+    sayHi();
   }
 }
