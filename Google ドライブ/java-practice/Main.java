@@ -1,23 +1,21 @@
 public class Main {
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
 
-    // switch文
-    // *breakの書き忘れに注意
-    String signal = "oppai";
+    // while
+    // 条件判定が前
+    // 0 - 9
+    int i = 0;
+    // while (i < 10) {
+    // System.out.println(i);
+    // i++;
+    // }
 
-    switch (signal) {
-      case "red":
-        System.out.println("stop!");
-        break;
-      case "blue":
-        System.out.println("go!");
-        break;
-      case "yellow":
-        System.out.println("caution!");
-        break;
-      default:
-        System.out.println("wrong signal!");
-        break;
-    }
+    // do - while
+    // 条件判定が後
+    do {
+      System.out.println(i);
+      i++;
+    } while (i < 10);
   }
+
 }
