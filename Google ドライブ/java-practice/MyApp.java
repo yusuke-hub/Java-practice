@@ -1,40 +1,30 @@
-// final: 変更ができない
-// クラスにつけると継承できなくなり
-// メソッドにつけるとOverrideできなくなる
-final class User {
-  protected String name;
-  // 書く順番は決まっていないが、慣習的には以下の順番
-  // アクセス修飾子 static final
-  private static final double VERSION = 1.1;
+// 抽象クラス -> 具象クラス
+// 他のクラスに継承するためのクラスでインスタンス化することはできない
 
-  public User(String name) {
-    this.name = name;
-    // VERSIONは値が変更できない定数^
-    // User.VERSION = 1.2;
-  }
+abstract class User {
+  public abstract void sayHi(); // 抽象メソッド
+}
 
-  public final void sayHi() {
-    System.out.println("hi! " + this.name);
+class JapaneseUser extends User {
+  // もし抽象メソッドを定義したい場合は、必ず親であるUserクラスを抽象クラスにしないといけない
+  @Override
+  public void sayHi() {
+    System.out.println("こんにちは！");
   }
 }
 
-class AdminUser extends User {
-
-  public AdminUser(String name) {
-    super(name);
-  }
-
+class AmericanUser extends User {
   @Override
   public void sayHi() {
-    System.out.println("[admin] hi! " + this.name);
+    System.out.println("Hi！");
   }
-
 }
 
 public class MyApp {
-
   public static void main(String[] args) {
-    User tom = new User("tom");
+    AmericanUser tom = new AmericanUser();
+    JapaneseUser aki = new JapaneseUser();
+    tom.sayHi();
+    aki.sayHi();
   }
-
 }
