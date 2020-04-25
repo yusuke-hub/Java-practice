@@ -1,32 +1,32 @@
-// static
-// インスタンス化しなくても直接使えるフィールドやメソッドを定義できる
+// final: 変更ができない
+// クラスにつけると継承できなくなり
+// メソッドにつけるとOverrideできなくなる
+final class User {
+  protected String name;
+  // 書く順番は決まっていないが、慣習的には以下の順番
+  // アクセス修飾子 static final
+  private static final double VERSION = 1.1;
 
-class User {
-  private String name;
-  private static int count = 0;
-
-  // static {}
-  // クラスを使う前に、行いたい初期化処理を記述する
-  static {
-    User.count = 0;
-    System.out.println("Static initializer");
-  }
-
-  // インスタンス・イニシャライザ
-  // インスタンスを初期化する際に行う処理を書く
-  {
-    System.out.println("Instance initializer");
-  }
-
-  public User(String name, int score) {
+  public User(String name) {
     this.name = name;
-    // staticを定義したクラス変数は先頭にクラス名をつける事でアクセスできる
-    User.count++;
-    System.out.println("Constructor");
+    // VERSIONは値が変更できない定数^
+    // User.VERSION = 1.2;
   }
 
-  public static void getInfo() {
-    System.out.println("# of instances:" + User.count);
+  public final void sayHi() {
+    System.out.println("hi! " + this.name);
+  }
+}
+
+class AdminUser extends User {
+
+  public AdminUser(String name) {
+    super(name);
+  }
+
+  @Override
+  public void sayHi() {
+    System.out.println("[admin] hi! " + this.name);
   }
 
 }
@@ -34,11 +34,7 @@ class User {
 public class MyApp {
 
   public static void main(String[] args) {
-    User.getInfo();
-    User tom = new User("tom", 85);
-    User.getInfo();
-    User bob = new User("bob", -21);
-    User.getInfo();
+    User tom = new User("tom");
   }
 
 }
