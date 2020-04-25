@@ -1,30 +1,39 @@
-// 抽象クラス -> 具象クラス
-// 他のクラスに継承するためのクラスでインスタンス化することはできない
+// interface 
+// クラスの仲間であり、抽象クラスの親戚みたいなもの
+// implementsする複数の小クラスたちに共通のメソッド群を実装するよう強制できる
+// あるクラスがインターフェースを実装していれば、少なくともそのインターフェースが定めたメソッドは持っている事が保証される
 
-abstract class User {
-  public abstract void sayHi(); // 抽象メソッド
-}
+// interfaceに宣言されたメソッドは自動的にpublicかつabstractになる
+interface Printable {
 
-class JapaneseUser extends User {
-  // もし抽象メソッドを定義したい場合は、必ず親であるUserクラスを抽象クラスにしないといけない
-  @Override
-  public void sayHi() {
-    System.out.println("こんにちは！");
+  // interfaceは本来フィールドを持たないが、
+  // public static finalが着いたフィールドだけは宣言が許される
+  // 無ければ自動補完されるので、省略可
+  double VERSION = 1.2;
+
+  // 抽象メソッド
+  void print();
+
+  // defaultメソッド
+  public default void getInfo() {
+    System.out.println("I/F ver. " + Printable.VERSION);
   }
+  // staticメソッド
 }
 
-class AmericanUser extends User {
+class User implements Printable {
   @Override
-  public void sayHi() {
-    System.out.println("Hi！");
+  public void print() {
+    System.out.println("Now printing user profile...");
   }
 }
 
 public class MyApp {
+
   public static void main(String[] args) {
-    AmericanUser tom = new AmericanUser();
-    JapaneseUser aki = new JapaneseUser();
-    tom.sayHi();
-    aki.sayHi();
+    User tom = new User();
+    tom.print();
+    tom.getInfo();
   }
+
 }
