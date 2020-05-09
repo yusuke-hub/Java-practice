@@ -1,87 +1,33 @@
-// Thread
-
-// public interface Runnable
-// このクラスは引数のないメソッドrunを定義しなければならない。
-// Thread をサブクラス化せずにクラスをアクティブにする手段を提供する
-// Thread のインスタンスを生成し、ターゲットとしてクラス自身を渡すことにより Thread をサブクラス化をしなくても実行できる
-
-class MyRunnable implements Runnable {
-  // Runnableの抽象メソッドをoverride
-  @Override
-  public void run() {
-    for (int i = 0; i < 500; i++) {
-      // 改行を切るためにはprintとすればOK
-      System.out.print("*");
-    }
-  }
-}
-
 public class MyApp {
   public static void main(String[] args) {
-    MyRunnable r = new MyRunnable();
-    // Thread t = new Thread(r);
-    // t.start();
+    String s = "abcdef";
+    System.out.println(s.length());
+    // substring(i1, i2)
+    // i1番目からi2番目の手前までの文字列を出力する
+    System.out.println(s.substring(1, 4));
+    // replaceALL("s1", "s2")
+    // s1をs2に置換する
+    System.out.println(s.replaceAll("cd", "CD"));
 
-    // 無名クラス
-    // 抽象メソッドをその場で実装していく
-    // インターフェースをインスタンス化しているように見えるが、
-    // 実際はそのインターフェースを実装しているクラスをインスタンス化していることになる
-    // new Thread(new Runnable() {
-    // // Runnableの抽象メソッドをoverride
-    // @Override
-    // public void run() {
-    // for (int i = 0; i < 500; i++) {
-    // // 改行を切るためにはprintとすればOK
-    // System.out.print("*");
-    // }
-    // }
-    // }).start();
+    String s1 = "ab";
+    String s2 = "ab";
 
-    // ラムダ式
-    // lambda: ギリシャ文字のアルファベット第11字「λ」
-    new Thread(() -> {
-      // Runnableの抽象メソッドをoverride
-      for (int i = 0; i < 500; i++) {
-        // 改行を切るためにはprintとすればOK
-        System.out.print("*");
-      }
-    }).start();
+    // 文字列型においては、既に宣言されている変数と同じ文字列で
+    // 新たに変数が宣言された場合、既に宣言されて居る変数と同じメモリ領域が使われる
+    if (s1.equals(s2)) {
+      System.out.println("same!");
+    }
 
-    for (int i = 0; i < 500; i++) {
-      System.out.print(",");
+    if (s1 == s2) {
+      System.out.println("same!same!");
+    }
+
+    // 新しいメモリ領域を確保したい場合は、以下のように明示的にインスタンス化する
+    String ss1 = new String("ab");
+    String ss2 = new String("ab");
+
+    if (ss1 == ss2) {
+      System.out.println("same!same!same!");
     }
   }
 }
-
-// public synchronized void start() {
-// if (threadStatus != 0)
-// throw new IllegalThreadStateException();
-
-// this = Threadクラス
-// group.add(this);
-
-// boolean started = false;
-
-// try..catch..finally
-// tryブロックの中で例外が発生すると残りの処理はおこなわれずにcatchブロックへ処理が移る
-// try文を終了する前に必ず実行させたい処理がある場合、finallyを使用して記述する
-
-// try {
-
-// start0();
-// → private native void start0();
-// → native修飾子
-// メソッドがネイティブメソッド(Java以外の言語で実装されているメソッド）である事を示す
-
-// started = true;
-
-// } finally {
-// try {
-// if (!started) {
-// group.threadStartFailed(this);
-// }
-// } catch (Throwable ignore) {
-
-// }
-// }
-// }
