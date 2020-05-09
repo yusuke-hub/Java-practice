@@ -1,22 +1,62 @@
-// generics
-// 汎用化されたデータ型でクラスやインターフェースを作ることができる
+// Thread
 
-// <>という記号をつけて、汎用化する方をどう表現するか指定する
-// Typeと言う意味で大文字のTが使われることが多い
-class MyData<T> {
-  public void getThree(T x) {
-    System.out.println(x);
-    System.out.println(x);
-    System.out.println(x);
+// public interface Runnable
+// このクラスは引数のないメソッドrunを定義しなければならない。
+// Thread をサブクラス化せずにクラスをアクティブにする手段を提供する
+// Thread のインスタンスを生成し、ターゲットとしてクラス自身を渡すことにより Thread をサブクラス化をしなくても実行できる
+
+class MyRunnable implements Runnable {
+  // Runnableの抽象メソッドをoverride
+  @Override
+  public void run() {
+    for (int i = 0; i < 500; i++) {
+      // 改行を切るためにはprintとすればOK
+      System.out.print("*");
+    }
   }
 }
 
 public class MyApp {
   public static void main(String[] args) {
-    // <>内に入るデータ型は参照型のみ
-    MyData<Integer> i = new MyData<>();
-    i.getThree(55);
-    MyData<String> s = new MyData<>();
-    s.getThree("Matui");
+    MyRunnable r = new MyRunnable();
+    Thread t = new Thread(r);
+    t.start();
+
+    for (int i = 0; i < 500; i++) {
+      System.out.print(",");
+    }
   }
 }
+
+// public synchronized void start() {
+// if (threadStatus != 0)
+// throw new IllegalThreadStateException();
+
+// this = Threadクラス
+// group.add(this);
+
+// boolean started = false;
+
+// try..catch..finally
+// tryブロックの中で例外が発生すると残りの処理はおこなわれずにcatchブロックへ処理が移る
+// try文を終了する前に必ず実行させたい処理がある場合、finallyを使用して記述する
+
+// try {
+
+// start0();
+// → private native void start0();
+// → native修飾子
+// メソッドがネイティブメソッド(Java以外の言語で実装されているメソッド）である事を示す
+
+// started = true;
+
+// } finally {
+// try {
+// if (!started) {
+// group.threadStartFailed(this);
+// }
+// } catch (Throwable ignore) {
+
+// }
+// }
+// }
