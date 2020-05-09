@@ -2,35 +2,27 @@ import java.util.*;
 
 public class MyApp {
   public static void main(String[] args) {
-    // HashMap: key value
-    // 複数データ管理をするためのもの
-    // TreeMap
-    // データを保持する順番はkeyによってソートされた順番
-    // LinkedHashMap
-    // データを保持する順番は追加された順番
 
-    // HashMap<String, Integer> sales = new HashMap<>();
-    TreeMap<String, Integer> sales = new TreeMap<>();
+    // Stream
+    // 複数の値を順番に処理していくための仕組み。
+    // ArrayListなどの集合データと合わせて、使われる
 
-    sales.put("tom", 10);
-    sales.put("bob", 20);
-    sales.put("steve", 30);
+    // 宣言と同時に値を入れ込んでいく方法↓
+    // Arrays.asList()で配列を作り、値を入れ込んでいく
+    List<Integer> sales = new ArrayList<>(Arrays.asList(12, 30, 22, 4, 9));
 
-    System.out.println(sales.get("tom"));
-    System.out.println(sales.size());
+    sales.stream()
+        // 中間処理
+        // 指定した条件が真の値だけを抽出できる
+        .filter(e -> e % 3 == 0).map(e -> "(" + e
+            + ")")
 
-    // Map.Entry
-    // Mapの中身を確認する
-    for (Map.Entry<String, Integer> sale : sales.entrySet()) {
-      System.out.println(sale.getKey() + ":" + sale.getValue());
-    }
-
-    sales.put("tom", 100);
-    sales.remove("steve");
-
-    for (Map.Entry<String, Integer> sale : sales.entrySet()) {
-      System.out.println(sale.getKey() + ":" + sale.getValue());
-    }
+        // 終端処理
+        // .forEach
+        // 抽出した値に対して、処理を実行する
+        // メソッド参照という仕組みを用いて、メソッド自体を.forEach()に渡すことができる.
+        
+        .forEach(System.out::println);
   }
 
 }
