@@ -1,22 +1,19 @@
+
+// Randomクラスをjavaのutilパッケージからimport
+import java.util.Random;
+
 public class MyApp {
   public static void main(String[] args) {
+    double d = 35.121;
+    System.out.println(Math.ceil(d)); // 切り上げ
+    System.out.println(Math.floor(d)); // 切り捨て
+    System.out.println(Math.round(d)); // 四捨五入
+    System.out.println(Math.PI); // 円周率
 
-    int score = 50;
-    double height = 169.5;
-    String name = "Kawabata";
+    Random r = new Random();
+    System.out.println(r.nextDouble()); // 0 - 1
+    System.out.println(r.nextInt(100)); // 0 - 100
+    System.out.println(r.nextBoolean()); // 真偽値
 
-    // printf
-    // 書式を指定して、出力できるメソッド
-    // format
-    // printfと似ているメソッド
-
-    // 10:左寄せ -10:右寄せ
-    // %[整数の表示する桁数].[小数点以下の表示する桁数]f
-
-    System.out.printf("name: %s, score: %d, height: %f\n", name, score, height);
-    System.out.printf("name: %-10s, score: %-10d, height: %5.3f\n", name, score, height);
-
-    String s = String.format("name: %10s, score: %10d, height: %5.2f\n", name, score, height);
-    System.out.println(s);
   }
 }
