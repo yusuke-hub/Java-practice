@@ -19,8 +19,33 @@ class MyRunnable implements Runnable {
 public class MyApp {
   public static void main(String[] args) {
     MyRunnable r = new MyRunnable();
-    Thread t = new Thread(r);
-    t.start();
+    // Thread t = new Thread(r);
+    // t.start();
+
+    // 無名クラス
+    // 抽象メソッドをその場で実装していく
+    // インターフェースをインスタンス化しているように見えるが、
+    // 実際はそのインターフェースを実装しているクラスをインスタンス化していることになる
+    // new Thread(new Runnable() {
+    // // Runnableの抽象メソッドをoverride
+    // @Override
+    // public void run() {
+    // for (int i = 0; i < 500; i++) {
+    // // 改行を切るためにはprintとすればOK
+    // System.out.print("*");
+    // }
+    // }
+    // }).start();
+
+    // ラムダ式
+    // lambda: ギリシャ文字のアルファベット第11字「λ」
+    new Thread(() -> {
+      // Runnableの抽象メソッドをoverride
+      for (int i = 0; i < 500; i++) {
+        // 改行を切るためにはprintとすればOK
+        System.out.print("*");
+      }
+    }).start();
 
     for (int i = 0; i < 500; i++) {
       System.out.print(",");
