@@ -1,36 +1,36 @@
 import java.util.*;
 
 public class MyApp {
-  // ArrayList
-  // リストは配列とよく似ており、値の集合を扱うために使用する
-  // リストは要素が追加された順番を保持し、重複した要素もそのまま保持できる
-
   public static void main(String[] args) {
-    // HashSet
-    // 重複して同じ値を入れる事はできない
-    // データを保持する順番が定まらない
+    // HashMap: key value
+    // 複数データ管理をするためのもの
+    // TreeMap
+    // データを保持する順番はkeyによってソートされた順番
+    // LinkedHashMap
+    // データを保持する順番は追加された順番
 
-    // TreeSet
-    // 値順にソートされる
-    // LinkedHachSet
-    // 追加された順番を保持する
-    
-    // HashSet<Integer> sales = new HashSet<>();
-    TreeSet<Integer> sales = new TreeSet<>();
-    sales.add(40);
-    sales.add(20);
-    sales.add(80);
-    sales.add(10);
+    // HashMap<String, Integer> sales = new HashMap<>();
+    TreeMap<String, Integer> sales = new TreeMap<>();
 
+    sales.put("tom", 10);
+    sales.put("bob", 20);
+    sales.put("steve", 30);
+
+    System.out.println(sales.get("tom"));
     System.out.println(sales.size());
-    for (Integer sale : sales) {
-      System.out.println(sale);
+
+    // Map.Entry
+    // Mapの中身を確認する
+    for (Map.Entry<String, Integer> sale : sales.entrySet()) {
+      System.out.println(sale.getKey() + ":" + sale.getValue());
     }
 
-    sales.remove(10);
+    sales.put("tom", 100);
+    sales.remove("steve");
 
-    for (Integer sale : sales) {
-      System.out.println(sale);
+    for (Map.Entry<String, Integer> sale : sales.entrySet()) {
+      System.out.println(sale.getKey() + ":" + sale.getValue());
     }
   }
+
 }
