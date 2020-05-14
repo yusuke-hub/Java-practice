@@ -45,5 +45,27 @@ public class Main {
         // 小文字のlだと1と混乱するのでL
         short bigLongLiteralValue = 32767;
 
+        // Casting
+        // Javaでは全ての数字をデフォルトでIntとして扱う
+        int myTotal = (myMinIntValue / 2);
+        byte myNewByteValue = (byte) (myMinByteValue / 2);
+        short myNewShortValue = (short) (myMinShortValue / 2);
+
+        int chalIntValue = 60;
+        byte chalByteValue = 120;
+        short chalShortValue = 4820;
+        long chalLongValue = (long)((chalIntValue + chalByteValue + chalShortValue) * 10);
+        System.out.println(chalLongValue);
+
+        byte byteValue = 10;
+        short shortValue = 20;
+        int intValue = 50;
+
+        // long型に関しては、Castingの例外
+        // Javaが右辺を自動的にlong型と評価してくれるので、LとしなくてもOK
+        long longTotal = 50000L + 10L * (byteValue + shortValue + intValue);
+        System.out.println(longTotal);
+
+        short shortTotal = (short) (1000 + 10 * (byteValue + shortValue + intValue));
     }
 }
