@@ -7,6 +7,10 @@ public class Main {
 
     public static void main(String[] args) {
         calcFeetAndInchesToCentimeters(10);
+        // 基本データ型の値と空文字を「+」演算子で連結することで、数値を文字列に変換できる
+        String print1 = "";
+        print1 += 1 + " ";
+        System.out.println(print1);
     }
     // my solution
 //    public static double calcFeetAndInchesToCentimeters(double feet, double inches){
