@@ -40,60 +40,133 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        numberToWords(234);
-        System.out.println("");
-        numberToWords(567);
-        System.out.println("");
-        numberToWords(89);
-        System.out.println("");
-        System.out.println(getDigitCount(123456789));
 
     }
-    private static Map<Integer, String> numNames = new HashMap<Integer, String>() {
-        {
-            put(0, "Zero");
-            put(1, "One");
-            put(2, "Two");
-            put(3, "Three");
-            put(4, "Four");
-            put(5, "Five");
-            put(6, "Six");
-            put(7, "Seven");
-            put(8, "Eight");
-            put(9, "Nine");
-        }
-    };
+//    private static Map<Integer, String> numNames = new HashMap<Integer, String>() {
+//        {
+//            put(0, "Zero");
+//            put(1, "One");
+//            put(2, "Two");
+//            put(3, "Three");
+//            put(4, "Four");
+//            put(5, "Five");
+//            put(6, "Six");
+//            put(7, "Seven");
+//            put(8, "Eight");
+//            put(9, "Nine");
+//        }
+//    };
+//
+//        public static void numberToWords(int number){
+//            if(number < 0){
+//                System.out.println("Invalid Value");
+//            } else{
+//                number = reverse(number);
+//                int removedNum;
+//                int aDigitRemovedNum;
+//                while(number != 0){
+//                    removedNum = number % 10;
+//                    number /= 10;
+//                    for(Map.Entry<Integer, String> entry : numNames.entrySet()){
+//                        if(removedNum == entry.getKey()){
+//                            System.out.println(entry.getValue());
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        public static int reverse(int number){
+//            String numberStr1 = String.valueOf(number);
+//            String reversedNumberStr = new StringBuffer(numberStr1).reverse().toString();
+//            return Integer.parseInt(reversedNumberStr);
+//        }
+//        public static int getDigitCount(int number){
+//            if(number < 0){
+//                return -1;
+//            } else{
+//                return String.valueOf(number).length();
+//            }
+//        }
+public static void numberToWords(int number) {
 
-        public static void numberToWords(int number){
-            if(number < 0){
-                System.out.println("Invalid Value");
-            } else{
-                number = reverse(number);
-                int removedNum;
-                int aDigitRemovedNum;
-                while(number != 0){
-                    removedNum = number % 10;
-                    number /= 10;
-                    for(Map.Entry<Integer, String> entry : numNames.entrySet()){
-                        if(removedNum == entry.getKey()){
-                            System.out.println(entry.getValue());
-                        }
-                    }
-                }
-            }
+    if (number < 0) {
+        System.out.println("Invalid Value");
+    }
+    // 1234
+    // reverseNumber = 4321
+    // i             0 1 2 3
+    // reverseNumber 432 43 4 0
+    // reverseNumber % 10 1 2 3 4
+    // getDigitCount(number) = 4
+    int reverseNumber = reverse(number);
+    for (int i = 0; i < getDigitCount(number); i++) {
+
+        switch (reverseNumber % 10) {
+            case 0:
+                System.out.print("Zero ");
+                break;
+            case 1:
+                System.out.print("One ");
+                break;
+            case 2:
+                System.out.print("Two ");
+                break;
+            case 3:
+                System.out.print("Three ");
+                break;
+            case 4:
+                System.out.print("Four ");
+                break;
+            case 5:
+                System.out.print("Five ");
+                break;
+            case 6:
+                System.out.print("Six ");
+                break;
+            case 7:
+                System.out.print("Seven ");
+                break;
+            case 8:
+                System.out.print("Eight ");
+                break;
+            case 9:
+                System.out.print("Nine ");
+                break;
+            default:
+                break;
         }
-        public static int reverse(int number){
-            String numberStr1 = String.valueOf(number);
-            String reversedNumberStr = new StringBuffer(numberStr1).reverse().toString();
-            return Integer.parseInt(reversedNumberStr);
+        reverseNumber /= 10;
+    }
+
+    System.out.println();
+}
+
+    public static int reverse(int number) {
+
+        int reverseNumber = 0;
+
+        while (number != 0) {
+            reverseNumber = (reverseNumber * 10) + (number % 10);
+            number /= 10;
         }
-        public static int getDigitCount(int number){
-            if(number < 0){
-                return -1;
-            } else{
-                return String.valueOf(number).length();
-            }
+        return reverseNumber;
+    }
+
+    public static int getDigitCount(int number) {
+
+        if (number < 0) {
+            return -1;
         }
+
+        // numberが2桁以上だったら、1スタートのカウントに1をプラスする
+        int counter = 1;
+        while (number > 9) {
+            number /= 10;
+            counter++;
+        }
+        return counter;
+    }
+
     }
 
 
