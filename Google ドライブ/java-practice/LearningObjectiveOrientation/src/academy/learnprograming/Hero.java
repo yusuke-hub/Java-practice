@@ -3,31 +3,34 @@ package academy.learnprograming;
 public class Hero {
     String name;
     int hp;
-    
-    void sleep(){
-        // 同じクラス内のフィールドへのアクセスの場合、「this.」を省略しても動作はする
-        // しかし、ローカル変数や引数にも同じhpという名前の変数がある場合
-        // そちらが優先されてしまうなど予想外の動作になる可能性がある
-        // そのため、明示的にthisをつけておく
+    Sword sword;
+    // static
+    // 1, フィールド変数の実体がクラスに準備される 2, 全インスタンスに箱の分身が準備される 3, インスタンスが生成されていなくてもアクセスできる
+    // static メソッド
+    // 1, メソッド自体がクラスに属するようになる 2, インスタンスにメソッドの分身が準備される 3, インスタンスを1つも生み出すことなく呼び出せる
+    // 3の理由から、staticがついてないフィールドやメソッドは利用できない
+    static int money;
+
+    void attack(){
+        System.out.println(this.name + "は攻撃した！");
+        System.out.println("敵に5ポイントのダメージ与えた!");
+    }
+    // コンストラクタ
+    // 1, メソッド名がクラス名と完全に等しい 2, メソッド宣言に戻り値が記述されていない
+    // クラスがnewされた直後に自動的に実行される
+    // 意識すべきは、「プログラマが直接呼び出しているわけではない」という事
+    // あくまでインスタンスを生成することによって、間接的にHero()が実行される
+    // ❇ ︎1つもコンストラクタが定義されていない場合に限って、
+    // 「引数なし、処理内容なし」のコンストラクタ(デフォルトコンストラクタ)
+    // の定義がコンパイル時に自動的に追加される
+    Hero(String name){
         this.hp = 100;
-        System.out.println(this.name + "は、眠って回復した！");
+        this.name = name;
     }
-    
-    void sit(int sec){
-        this.hp += sec;
-        System.out.println(this.name + "は、" + sec + "秒座った！");
-        System.out.println("HPが" + sec + "ポイント回復した");
-    }
-    
-    void slip(){
-        this.hp -= 5;
-        System.out.println(this.name + "は、転んだ！");
-        System.out.println("5のダメージ！");
-    }
-    
-    void run(){
-        System.out.println(this.name + "は、逃げ出した！");
-        System.out.println("GAMEOVER");
-        System.out.println("最終HPは" + this.hp + "でした");
+
+    Hero(){
+//        this.hp = 100;
+//        this.Hero("ダミー"); // エラー
+        this("ダミー");
     }
 }

@@ -3,36 +3,38 @@ package academy.learnprograming;
 public class Main {
 
     public static void main(String[] args) {
-	    Hero h = new Hero();
-	    h.name = "ミナト";
-	    h.hp = 100;
-        System.out.println("勇者" + h.name + "を生み出しました!");
+        // 3, インスタンスが生成されていなくてもアクセスできる
+        Hero.money = 300;
+        System.out.println(Hero.money);
+        Hero h1;
+        h1 = new Hero();
+        h1.name = "ボブ";
+        h1.hp = 100;
+        System.out.println(h1.name + "の所持金は" + h1.money + "円です");
 
-        h.sit(5);
-        System.out.println(h.hp);
-        System.out.println("");
 
-        h.slip();
-        System.out.println(h.hp);
-        System.out.println("");
+        // 引数付きのコンストラクタが実行される
+        Hero h2 = new Hero("ミナト");
+        // 2, 全インスタンスに箱の分身が準備される
+        h2.money = 100;
+        Hero h3 = new Hero();
+        System.out.println(h2.name + "の所持金は" + h2.money + "円です");
+        System.out.println(h3.name);
 
-        h.sit(25);
-        System.out.println(h.hp);
-        System.out.println("");
 
-        h.run();
-        System.out.println("");
+        // Sword型のインスタンスに値を設定
+        Sword s = new Sword();
+        s.name = "炎の剣";
+        s.damage = 10;
 
-        Matango m1 = new Matango();
-        m1.hp = 50;
-        m1.suffix = 'A';
+        // 勇者h1のフィールドswordにsを設定
+        h1.sword = s;
+        System.out.println(h1.name + "の現在の武器は" + h1.sword.name);
 
-        Matango m2 = new Matango();
-        m2.hp = 48;
-        m2.suffix = 'B';
-        m1.run();
-        m2.run();
-
+        Wizard w = new Wizard();
+        w.name = "ジョン";
+        w.hp = 50;
+        w.heal(h1);
 
     }
 }
