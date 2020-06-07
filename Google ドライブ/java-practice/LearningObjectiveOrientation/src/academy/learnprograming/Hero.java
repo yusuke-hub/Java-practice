@@ -70,6 +70,9 @@ public class Hero {
         }
         this.name = name;
     }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
     public int getHp() {
         return this.hp;
     }
