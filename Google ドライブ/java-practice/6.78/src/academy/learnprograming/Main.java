@@ -3,17 +3,18 @@ package academy.learnprograming;
 public class Main {
 
     public static void main(String[] args) {
-	    BankAccount bankAccount = new BankAccount();
-	    bankAccount.setAccountNumber(12345);
-	    bankAccount.setBalance(10000);
-	    bankAccount.setCustomerName("Kawabata Yusuke");
-	    bankAccount.setEmail("yk1210140408@gmail.com");
-	    bankAccount.setPhoneNumber(123456789);
-        System.out.println(bankAccount.getBalance());
-        bankAccount.deposit(10000);
-        System.out.println(bankAccount.getBalance());
-        bankAccount.withdraw(5000);
-        System.out.println(bankAccount.getBalance());
+
+	    BankAccount bobsAccount = new BankAccount("12345", 0.00, "Bob Brown", "myemail@bob.com", "(007)123-4567");
+	    BankAccount mikesAccount = new BankAccount();
+        System.out.println(mikesAccount.getNumber());
+        System.out.println(mikesAccount.getBalance());
+        System.out.println(bobsAccount.getNumber());
+        System.out.println(bobsAccount.getBalance());
+        bobsAccount.withdrawal(100.0);
+        bobsAccount.withdrawal(50.0);
+
+        bobsAccount.deposit(51.0);
+        bobsAccount.withdrawal(100.0);
 
     }
 }

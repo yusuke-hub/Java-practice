@@ -13,14 +13,67 @@
 package academy.learnprograming;
 
 public class BankAccount {
-    private int accountNumber;
-    private int balance;
-    private String customerName;
-    private String email;
-    private int phoneNumber;
+//    ★ My Solution
+//    private int accountNumber;
+//    private int balance;
+//    private String customerName;
+//    private String email;
+//    private String phoneNumber;
+//
+//    public void setAccountNumber(int accountNumber) {
+//        this.accountNumber = accountNumber;
+//    }
+//    public void setBalance(int balance) {
+//        this.balance = balance;
+//    }
+//    public void setCustomerName(String customerName) {
+//        this.customerName = customerName;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//    public void setPhoneNumber(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
+//    public int getAccountNumber() {
+//        return accountNumber;
+//    }
+//    public int getBalance() {
+//        return balance;
+//    }
+//    public String getCustomerName() {
+//        return customerName;
+//    }
+//    public String getEmail() {
+//        return email;
+//    }
+//    public String getPhoneNumber() {
+//        return phoneNumber;
+//    }
+//    public void deposit(int balance) {
+//        this.balance += balance;
+//        System.out.println(balance + "yen was deposited and the amount deposited was " + this.balance +  "yen.");
+//    }
+//    public void withdraw(int balance) {
+//        if(this.balance < balance) {
+//            System.out.println("Your balance is insufficient.");
+//        } else {
+//            this.balance -= balance;
+//            System.out.println(balance + "yen was withdrawn and the amount deposited was " + this.balance + "yen.");
+//        }
+//    }
+//    ★ Solution Example
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
+
+    private String number;
+    private double balance;
+    private String customerName;
+    private String customerEmailAddress;
+    private String customerPhoneNumber;
+
+    public void setNumbe(String number) {
+        this.number = number;
     }
     public void setBalance(int balance) {
         this.balance = balance;
@@ -28,37 +81,52 @@ public class BankAccount {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
-    public void setEmail(String email) {
-        this.email = email;
+
+    public void setCustomerEmailAddress(String customerEmailAddress) {
+        this.customerEmailAddress = customerEmailAddress;
     }
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+        this.customerPhoneNumber = customerPhoneNumber;
     }
-    public int getAccountNumber() {
-        return accountNumber;
+    public String getNumber() {
+        return number;
     }
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
     public String getCustomerName() {
         return customerName;
     }
-    public String getEmail() {
-        return email;
+    public String getCustomerEmailAddress() {
+        return customerEmailAddress;
     }
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
     }
-    public void deposit(int balance) {
-        this.balance += balance;
-        System.out.println(balance + "yen was deposited and the amount deposited was " + this.balance +  "yen.");
+    public BankAccount() {
+        this("56789", 2.50, "Default name", "Default address", "default phone");
+        System.out.println("Empty constructor called");
     }
-    public void withdraw(int balance) {
-        if(this.balance < balance) {
-            System.out.println("Your balance is insufficient.");
+
+    public BankAccount(String number, double balance, String customerName, String customerEmailAddress, String customerPhoneNumber) {
+        System.out.println("Account constructor with parameters called");
+        this.number = number;
+        this.balance = balance;
+        this.customerName = customerName;
+        this.customerEmailAddress = customerEmailAddress;
+        this.customerPhoneNumber = customerPhoneNumber;
+    }
+    public void deposit(double depositAmount) {
+        this.balance += depositAmount;
+        System.out.println("Deposit of " + depositAmount + " made. New balance is " + this.balance);
+    }
+
+    public void withdrawal(double withdrawalAmount) {
+        if(this.balance - withdrawalAmount <=0) {
+            System.out.println("Only" + this.balance + " available. Withdrawal not processed");
         } else {
-            this.balance -= balance;
-            System.out.println(balance + "yen was withdrawn and the amount deposited was " + this.balance + "yen.");
+            this.balance -= withdrawalAmount;
+            System.out.println("Withdrawal of " + withdrawalAmount + " processed. Remaining balance = " + this.balance);
         }
     }
 
