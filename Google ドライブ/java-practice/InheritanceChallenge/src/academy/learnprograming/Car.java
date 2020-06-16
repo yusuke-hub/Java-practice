@@ -1,6 +1,7 @@
 package academy.learnprograming;
 
 public class Car extends Vehicle {
+    // ★ Another Solution
     private int wheels;
     private int doors;
     private int gears;
