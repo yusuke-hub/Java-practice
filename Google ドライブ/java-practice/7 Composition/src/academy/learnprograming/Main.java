@@ -16,6 +16,7 @@ public class Main {
 	    PC thePC = new PC(theCase, theMonitor, theMotherboard);
 	    thePC.powerUp();
 
+
         // 設計図を使って家の一室を作る。
         // その部屋に含まれるべきものを考えてみましょう。
         // たぶん家の物理的な部分だけでなく、家具も
@@ -24,6 +25,21 @@ public class Main {
         // その後、getterを使用しないなど、オブジェクトを非表示にするための少なくとも1つのメソッドを追加します。
         // しかし、mainクラス内で合成に使用されるオブジェクトにアクセスするには
         // この動画で見たように
+
+        Wall wall1 = new Wall("West");
+        Wall wall2 = new Wall("Eat");
+        Wall wall3 = new Wall("South");
+        Wall wall4 = new Wall("North");
+
+        Ceiling ceiling = new Ceiling(12, 55);
+        Bed bed = new Bed("Modern", 4, 3, 2, 1);
+        Lamp lamp = new Lamp("Classic", false, 75);
+        Bedroom bedRoom = new Bedroom("Tims", wall1, wall2, wall3, wall4, ceiling, bed, lamp);
+        bedRoom.makeBed();
+
+        bedRoom.getLamp().turnOn();
+
+
 
         // ●必要なオブジェクト
         // ★家house
