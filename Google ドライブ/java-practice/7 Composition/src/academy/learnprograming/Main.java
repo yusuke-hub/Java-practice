@@ -14,8 +14,74 @@ public class Main {
 	    Motherboard theMotherboard = new Motherboard("BJ-200", "Asus", 4, 6, "v2.44");
 
 	    PC thePC = new PC(theCase, theMonitor, theMotherboard);
-	    thePC.getMonitor().drawPixel(1500, 1200, "red");
-	    thePC.getMotherboard().loadProgram("Windows 1.0");
-	    thePC.getTheCase().pressPowerButton();
+	    thePC.powerUp();
+
+        // 設計図を使って家の一室を作る。
+        // その部屋に含まれるべきものを考えてみましょう。
+        // たぶん家の物理的な部分だけでなく、家具も
+        // getterとgetterを介してオブジェクトにアクセスするための少なくとも1つのメソッドを追加します。
+        // 以前のビデオで見たように、そのオブジェクトのpublicメソッド
+        // その後、getterを使用しないなど、オブジェクトを非表示にするための少なくとも1つのメソッドを追加します。
+        // しかし、mainクラス内で合成に使用されるオブジェクトにアクセスするには
+        // この動画で見たように
+
+        // ●必要なオブジェクト
+        // ★家house
+        // ・パーツ
+            // 屋根roof
+            // ドアdoors
+                // ノブknob   ロックlock
+            // 床floor
+            // 明かりlight
+            // 窓ガラスwindowPane
+            // バスタブbathTab
+            // トイレtoilet
+
+        // ・調度品
+            // カーテンcurtain
+        // ・家具furniture
+            // 机desks
+            // 椅子chairs
+            // 時計clock
+            // 服用の棚clothesRack
+            // 本棚bookShelves
+            // ベッドbed
+        // ・電子機器
+            // 洗濯機washingMachine
+            // 冷蔵庫
+            // 電子レンジ
+            // オーブン
+            // コンロ
+            // ステレオ
+            // テレビterevision
+            // ドライヤー
+            // 空気清浄機
+            // エアコン
+            // パソコン
+            // 電話
+            // コピー機
+
+            //
+        // ・部屋
+            // 名前
+            // 縦length
+            // 横width
+            // 高さheight
+            // 畳数/床面積mat/flooarSpace = length * width
+            // 容積volume = length * width * height
+            // 机の数desk
+            // 椅子の数chair
+            // コンセント差し込み口の数outlet
+            // 明かりの数light
+                // 玄関Entrance
+                // リビングlivingRoom
+                // キッチンkitchen
+                // 寝室bedRoom
+                // 個室privateRoom
+                // 風呂bathRoom
+                // トイレrestRoom
+                // ベランダveranda
+                // 書斎aStudy
+        //
      }
 }
