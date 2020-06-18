@@ -11,6 +11,6 @@ public class Lamp {
         this.globalRating = globalRating;
     }
     public void turnOn() {
-        System.out.println("Lamp -> Turning on");
+        System.out.println("Lamp -> Turning on");s
     }
 }
