@@ -8,38 +8,79 @@ package academy.learnprograming;
 
 public class Printer {
     private int tonerLevel;
-    private int numberOfPages;
-    private boolean isDuplex;
+    private int pagesPrinted;
+    private boolean duplex;
 
-    public Printer(int tonerLevel, int numberOfPages, boolean isDuplex) {
-        this.tonerLevel = tonerLevel;
-        this.numberOfPages = numberOfPages;
-        this.isDuplex = false;
-    }
-
-    public int getTonerLevel() {
-        return tonerLevel;
-    }
-
-    public int getNumberOfPages() {
-        return numberOfPages;
-    }
-
-    public boolean isDuplex() {
-        return isDuplex;
-    }
-
-    public void  fillUp(int toner) {
-        while(tonerLevel <100) {
-            tonerLevel += toner;
-            System.out.println(tonerLevel);
+    public Printer(int tonerLevel, boolean duplex) {
+        if(tonerLevel >-1 && tonerLevel <= 100) {
+            this.tonerLevel = tonerLevel;
+        } else {
+            this.tonerLevel = -1;
         }
-        System.out.println("トナーは100%になりました");
+        this.duplex = duplex;
+        this.pagesPrinted = 0;
     }
-    public void simulate(int numberOfPages, boolean isDuplex) {
-        this.numberOfPages = numberOfPages;
-        if(isDuplex) {
-            this.isDuplex = isDuplex;
-        } else {}
+
+    public int addToner(int tonerAmount) {
+        if(tonerAmount >0 && tonerAmount <=100) {
+            if(this.tonerLevel + tonerAmount >100) {
+                return -1;
+            }
+            this.tonerLevel += tonerAmount;
+            return this.tonerLevel;
+        } else {
+            return -1;
+        }
     }
+
+    public int printPages(int pages) {
+        int pagesToPrint = pages;
+        if(this.duplex) {
+            pagesToPrint /= 2;
+            System.out.println("Printing in duplex mode");
+        }
+        this.pagesPrinted += pagesToPrint;
+        return pagesToPrint;
+    }
+
+    public int getPagesPrinted() {
+        return pagesPrinted;
+    }
+
+    //    ★ My Code
+//    private int tonerLevel;
+//    private int numberOfPages;
+//    private boolean isDuplex;
+//
+//    public Printer(int tonerLevel, int numberOfPages, boolean isDuplex) {
+//        this.tonerLevel = tonerLevel;
+//        this.numberOfPages = numberOfPages;
+//        this.isDuplex = false;
+//    }
+//
+//    public int getTonerLevel() {
+//        return tonerLevel;
+//    }
+//
+//    public int getNumberOfPages() {
+//        return numberOfPages;
+//    }
+//
+//    public boolean isDuplex() {
+//        return isDuplex;
+//    }
+//
+//    public void  fillUp(int toner) {
+//        while(tonerLevel <100) {
+//            tonerLevel += toner;
+//            System.out.println(tonerLevel);
+//        }
+//        System.out.println("トナーは100%になりました");
+//    }
+//    public void simulate(int numberOfPages, boolean isDuplex) {
+//        this.numberOfPages = numberOfPages;
+//        if(isDuplex) {
+//            this.isDuplex = isDuplex;
+//        } else {}
+//    }
 }
