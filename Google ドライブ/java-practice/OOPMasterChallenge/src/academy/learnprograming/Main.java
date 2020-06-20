@@ -54,8 +54,25 @@ package academy.learnprograming;
 public class Main {
 
     public static void main(String[] args) {
-        Humburger humburger = new Humburger("ハンバーガー", "小麦");
-        humburger.add(true, false, true, false, true);
-        humburger.getAdditions();
+        Humburger humburger = new Humburger("Basic", "Sausage", 3.56, "whitte");
+        double price = humburger.itemizeHamburger();
+        humburger.addHamburgerAddition1("Tomato", 0.27);
+        humburger.addHamburgerAddition2("Lettuce", 0.75);
+        humburger.addHamburgerAddition3("Cheese", 1.12);
+        System.out.println("Total Burger price is " + humburger.itemizeHamburger());
+
+        HealthyBurger healthyBurger = new HealthyBurger("Bacon", 5.67);
+        healthyBurger.addHamburgerAddition1("Egg", 5.43);
+        healthyBurger.addHealthyAddition2("Lenthils", 3.41);
+        System.out.println("Total Healthy Burger price is " + healthyBurger.itemizeHamburger());
+
+        DeluxeBurger db = new DeluxeBurger();
+        db.addHamburgerAddition1("Should not do this", 50.53);
+        db.itemizeHamburger();
+
+//        ★ My Solution
+//        Humburger humburger = new Humburger("ハンバーガー", "小麦");
+//        humburger.add(true, false, true, false, true);
+//        System.out.println(humburger.getAdditions());
     }
 }
