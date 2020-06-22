@@ -1,37 +1,35 @@
 package academy.learnprograming;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    private ArrayList<String> groceryList = new ArrayList<String>();
 
-    private static Scanner s = new Scanner(System.in);
-    private static int[] baseData = new int[10];
+    public void addGroceryItem(String item) {
+        groceryList.add(item);
+    }
 
+    public void printGroceryList() {
+        System.out.println("You have " + groceryList.size() + " items in your grocery list");
+        for(int i=0; i< groceryList.size(); i++) {
+            System.out.println((i+1) + ". " + groceryList.get(i));
+        }
+    }
+
+    public void modifyGroeryItem(int position, String newItem) {
+        groceryList.set(position, newItem);
+        System.out.println("Grocery item " + (position+1) + " has been modified.");
+    }
+
+    public void removeGroceryItem(int position) {
+        String theItem = groceryList.get(position);
+        groceryList.remove(position);
+    
+    }
     public static void main(String[] args) {
-        System.out.println("Enter 10 integers:");
-        getInput();
-        printArray(baseData);
-        resizeArray();
-        baseData[10] = 67;
-        baseData[11] = 34;
-        printArray(baseData);
+
     }
 
-    private static void getInput() {
-        for(int i = 0; i < baseData.length; i++)
-            baseData[i] = s.nextInt();
-    }
 
-    private static void printArray(int[] arr){
-        for(int i = 0; i < arr.length; i++)
-            System.out.print(arr[i] + " ");
-        System.out.println();
-    }
-
-    private static void resizeArray() {
-        int[] original = baseData;
-        baseData = new int[12];
-        for (int i = 0; i < original.length; i++)
-            baseData[i] = original[i];
-    }
 
 }
