@@ -13,7 +13,7 @@ public class Main {
         names.add("岸野");
         names.add("嶋田");
         // イテレータのインスタンスを生み出す場合は、newを使わず、
-        // iteratorメソッドを呼び出す
+        // igiteratorメソッドを呼び出す
         // これによりリストの先頭(最初の箱よりもっと前）を指した状態の矢印を取得する
         Iterator<String> it = names.iterator();
         while(it.hasNext()) {
