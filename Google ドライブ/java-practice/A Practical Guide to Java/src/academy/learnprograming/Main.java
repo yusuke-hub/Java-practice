@@ -24,5 +24,47 @@ public class Main {
         char[] data1 = str.toCharArray();
         System.out.println(Arrays.toString(data1));
 
+
     }
+
+    // 正規表現の活用
+    // 1 *: 直前の文字の0回以上の繰り返しを意味する
+    // 2 .: 任意の１文字
+    // 3 指定回数の繰り返し
+        // {n}: 直前の文字のn回の繰り返し
+        // {n,}: 直前の文字のn回以上の繰り返し
+        // {n,m}: 直前の文字のn回以上m回以下の繰り返し
+        // ?: 直前の文字の0回または1回の繰り返し
+        // +: 直前の文字の1回以上の繰り返し
+    // 4 []: []ないのどれか1文字に当てはまる
+    // 5 [-]: -記号の両端にある文字を含む範囲の任意の1文字を含む
+    // 6 ^: 文字列の先頭 ＄: 文字列の末尾
+
+
+    // ＄d: いずれかの数字 [0-9]
+    // ＄w: 英字、数字、アンダーバー [a-zA-Z_0-9]
+    // ＄s: 空白文字
+    // 入力チェック判定を行うメソッド → めっちゃ大変!
+    boolean isValidPlayerName(String name) {
+        if(name.length() != 8) {
+            return false;
+        }
+        char first = name.charAt(0);
+        if(!(first >= 'A' && first <= 'Z')) {
+            return false;
+        }
+        for(int i = 1; i < 8; i++) {
+            char c = name.charAt(i);
+            if(!(c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    boolean isValidPlayerName2(String name) {
+        return name.matches("[A-Z][A-Z0-9]{7}");
+    }
+
+
 }
