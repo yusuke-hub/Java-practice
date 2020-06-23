@@ -1,5 +1,6 @@
 package academy.learnprograming;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,35 +8,47 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        // Dateクラス
-            // Javaで時刻情報を取り扱う場合に標準的に利用される
-            // java.utilパッケージに属する
-            // 内部にエポック(基準時刻である1970年元日0時ちょうど)からの経過ミリ秒数をlong値で保持している
-            // new()でインスタンス化すると、現在の日時情報が格納される
-            // new(long 値)でインスタンス化すると、指定時刻の情報が格納される
-            // getTime()、setTime()を用いてインスタンス内に保持するlong値を取得、設定できる
-                // *人間が取り扱いづらい
-        Date now = new Date();
-        System.out.println(now);
-        System.out.println(now.getTime());
-        Date past = new Date(1316622225935L);
-        System.out.println(past);
+        // ★コレクションフレームワーク(Collenction Framework)
+            // データをまとめて格納するための入れ物クラスたち
+                // List
+                    // 順序通りに並べて格納する(中身の重複可)
+                // Map
+                    // ペアで対応づけて格納する
+                // Set
+                    // 順序があるとは限らない(中身の重複不可)
+                        // *ルール
+                        // 1 import文を記述する
+                        // 2 不等号の括弧を使い、格納するものの方を指定する
+                            // ex, ArrayList<String>
+                        // 3 確保の際にサイズを指定せず、要素は随時追加が可能
+                            // このため配列よりもArrayListの方が多く使われているが、
+                            // 配列の方がメモリ効率や性能は高いし、コレクションにもできないことがある
+                                // インスタンスでないものを格納できない
+                                    // × ArrayList<int> ● ArrayList<Integer>
+        // オートボクシング
+            // プリミティブ型 → ラッパークラス
+        // アンボクシング
+            // ↑の逆
 
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        // ↓ Calendarインスタンスが返す月の範囲は0-11なので注意
-        int month = cal.get(Calendar.MONTH) + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        System.out.println(year);
-        System.out.println(month);
-        System.out.println(day);
-
-
-        int myBirthYear = cal.get(Calendar.YEAR) - 25;
-        int myBirthMonth = 7;
-        int myBirthDay = cal.get(Calendar.DAY_OF_MONTH) - 15;
-        System.out.println("僕の誕生日は " + myBirthYear + "年" + myBirthMonth + "月" + myBirthDay + "日 です\n");
-        System.out.println("");
+        ArrayList<Integer> points = new ArrayList<Integer>();
+        points.add(10);
+        points.add(80);
+        points.add(75);
+        points.add(3, 100);
+        for(int i : points) {
+            System.out.println(i);
+        }
+        System.out.println(points.get(1));
+        System.out.println("ArrayList「points」に格納されている要素の数は、" + points.size() + "個です");
+        if(points.contains(100)) {
+            System.out.println("スコアが100の人がいます！");
+        }
+        points.remove(0);
+        System.out.println("スコア80は配列の" + (points.indexOf(80) + 1) + "番目に格納されています");
+        points.clear();
+        if(points.isEmpty()) {
+            System.out.println("ArrayList「points」には格納されている要素がありません");
+        }
     }
 
 
