@@ -1,43 +1,28 @@
 package academy.learnprograming;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
-	    String s1 = "スッキリJava";
-	    String s2 = "Java";
-	    String s3 = "java";
-	    String s4 = "";
-	    String s5 = "Java";
-	    if(s2.equals(s5)) {
-            System.out.println("s2とs5は等しい");
-        }
-        if(s2.equalsIgnoreCase(s3)) {
-            System.out.println("s2とs3はケースを区別しなければ等しい");
-        }
-        System.out.println("s1の長さは" + s1.length() + "です");
-        if(s4.isEmpty()) {
-            System.out.println("s4は空文字です");
-        }
-        System.out.println("");
+        // StringBuilder
+        // 内部に連結した文字列を蓄えるメモリ領域(バッファ)を持っている
+            // 1, append()メソッドを読んでバッファに文字列を追加する(必要に応じた回数を呼び出す)
+            // 2, 最後に1回toString()を呼び、完成した連結済みの文字列を取り出す
+            // * 本来であれば、バッファに文字列を追加するためであれば
+            // 戻り値はvoidで良いはずだが、以下のような呼び出し方(メソッドチェーン）を実現するために、自分自身を戻り値として返すようになっている
+            // sb.append("hello").append("java").append("world");
 
-        String s6 = "Java and Javascript";
-        if(s6.contains("Java")) {
-            System.out.println("文字列s6は、Javaを含んでいます");
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 10000; i++) {
+            sb.append("Java");
         }
-        if(s6.endsWith("Java")) {
-            System.out.println("文字列s6は、Javaが末尾にあります");
-        }
-        System.out.println("文字列s6で最初にJavaが登場する位置は" + s6.indexOf("Java"));
-        System.out.println("文字列s6で最後にJavaが登場する位置は" + s6.lastIndexOf("Java"));
-        System.out.println("");
+        String s = sb.toString();
+        System.out.println(s);
 
-        String s7 = "Java Programming";
-        // substring()メソッド
-            // 引数1つ 指定位置より後ろにある全ての文字列を返す
-            // 引数2つ 2つの指定位置の間にある部分文字列を返す
-        System.out.println("文字列s7の3文字目以降は" + s7.substring(3)); // a Programming
-        System.out.println("文字列s7の3-8文字目以降は" + s7.substring(3, 8)); // a Pro
-
+        String str = "こんにちはJava";
+        char[] data1 = str.toCharArray();
+        System.out.println(Arrays.toString(data1));
 
     }
 }
