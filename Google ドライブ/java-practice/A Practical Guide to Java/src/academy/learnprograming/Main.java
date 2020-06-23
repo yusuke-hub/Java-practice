@@ -29,6 +29,14 @@ public class Main {
         }
         System.out.println("文字列s6で最初にJavaが登場する位置は" + s6.indexOf("Java"));
         System.out.println("文字列s6で最後にJavaが登場する位置は" + s6.lastIndexOf("Java"));
+        System.out.println("");
+
+        String s7 = "Java Programming";
+        // substring()メソッド
+            // 引数1つ 指定位置より後ろにある全ての文字列を返す
+            // 引数2つ 2つの指定位置の間にある部分文字列を返す
+        System.out.println("文字列s7の3文字目以降は" + s7.substring(3)); // a Programming
+        System.out.println("文字列s7の3-8文字目以降は" + s7.substring(3, 8)); // a Pro
 
 
     }
