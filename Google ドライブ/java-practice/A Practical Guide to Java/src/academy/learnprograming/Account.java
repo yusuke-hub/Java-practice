@@ -1,35 +1,30 @@
 package academy.learnprograming;
 
 public class Account {
-    String accountNo;
+    int number;
 
-    // ★equalsメソッドをオーバーライドする際の定石
-    public boolean equals(Object o) {
-        // 1, 自分自身が引数として渡されてきた時、無条件でtrueを返す
-        if(o == this) return true;
-        // 2, nullが引数として渡されてきた時、無条件でfalseを返す
-        if(o == null) return false;
-        // 3, 比較し方が異なるならば、falseを返す(同じなら4に備えて、比較できるよう適切にキャストする)
-        if(!(o instanceof Account)) return false;
-        // 4, 2つのインスタンスが持つしかるべきフィールド同士を比較して等価か判定し、trueかfalseを返す
-        Account r = (Account) o;
-        if(!this.accountNo.trim().equals(r.accountNo.trim())) {
-            return false;
+    //        List<Account> list = new ArrayList<Account>();
+    //        ...
+    //        Collections.sort(list);
+        //        → 制約の不一致：型 Collectionsの総称メソッド
+        //        sort(List<T>)は引数(List<Account>)に適用できません。
+        //        推測される型 Accountは、制約付パラメーター
+        //        <T extends Comparable <? super T>の代替として有効ではありません
+
+    //sortで並び替えをするなら、どのように並べるのか指定する必要がある
+    // それで利用するのが、java.lang.Comparableインターフェース
+    // これのcompareTo()メソッドをオーバーライドすることで、
+    // Collectionsクラスのsort()は、格納している
+    // それぞれのインスタンスのcompareTo()を呼び出し、
+    // 大小関係を比較しながら、並び替えを実行してくれる
+    public int compareTo(Account obj) {
+        if(this.number < obj.number) {
+            return -1;
         }
-        return true;
+        if(this.number > obj.number) {
+            return 1;
+        }
+        return 0;
     }
-    // → クラスを作った際はequalsメソッドを必ずオーバーライドする!!
-        // *不要な場合は以下のケース
-            // そもそも等価を判定されることが考えられないクラス(データではなく、主に処理ロジックを持っているクラス)
-            // 親クラスは既にオーバーライドされていて、そのロジックで問題のないクラス
-                // *equalsの計算コスト
-                    // 1, 高速だが、曖昧な方法で、各要素に「大体同じか」を問い合わせる
-                    // 2, 「大体同じ」な要素にだけ、equals()で「厳密に同じか？」を問い合わせる
-                        // 1で用いるのがハッシュ値(hash code)
-                        // 全てのインスタンスにはhashCode()を呼び出された際に、
-                        // 「ハッシュ値の条件」に従った値を返す義務がある
-                            // ★ハッシュ値
-                                // インスタンスの内容を数値として要約したもの
-                                    // - 同じインスタンスからは、必ず同じハッシュ値が得られる
-                                    // - 異なるインスタンスからは、なるべく異なるハッシュ値が得られる
+
 }

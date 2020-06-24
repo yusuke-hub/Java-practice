@@ -21,7 +21,7 @@ class Hero {
         return "勇者(名前=" + this.name + "/HP=" + this.hp + "/MP=" + this.mp + ")";
     }
 
-    
+
     public int hashCode() {
         int result = 37;
         result = result * 31 + name.hashCode();
@@ -33,6 +33,18 @@ public class Main {
     public static void main(String[] args) {
         Hero a = new Hero();
         System.out.println(a); // toStringメソッドを定義していない場合 → academy.learnprograming.Hero@5a39699c
+
+
+//        List<Account> list = new ArrayList<Account>();
+//        ...
+//        Collections.sort(list);
+//        → 制約の不一致：型 Collectionsの総称メソッド
+//        sort(List<T>)は引数(List<Account>)に適用できません。
+//        推測される型 Accountは、制約付パラメーター
+//        <T extends Comparable <? super T>の代替として有効ではありません
+
+        //sortで並び替えをするなら、どのように並べるのか指定する必要がある
+        // それで利用するのが、java.lang.Comparableインターフェース
 
     }
 
