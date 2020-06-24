@@ -1,4 +1,8 @@
 package academy.learnprograming;
+// static import宣言を行うことで、
+// 列挙子以外にもstaticがついたクラスメンバについて
+// 記述の省略を可能にする
+import static academy.learnprograming.AccountType.FUTSU;
 
 class Sword {
     public String name;
@@ -100,21 +104,47 @@ class Hero implements Cloneable {
         return result;
     }
 }
+
+// ★ジェネリクス
+// 1, クラス宣言時に、EやKという「仮の型名」を使っておく
+    // 仮型引数の段階で、利用できる実型引数を制限できる
+        // ex, public class Pocket <E extends Character>
+// 2, クラス利用時に、それをStringなどの「実際の型」に置換して利用する
+
+// ↓ジェネリクスを使わずに実現したPocketクラス(V1)
+//    class Pocket {
+//    private Object data;
+//    public void put(Object d) {
+//        this.data = d;
+//    }
+//    public Object get() {
+//        return this.data;
+//    }
+//    }
+
+// ジェネリクスを使ったPocketクラス(V2)
+class Pocket<E> {
+    private E data;
+
+    public void put(E d) {
+        this.data = d;
+    }
+
+    public E get() {
+        return this.data;
+    }
+}
 public class Main {
     public static void main(String[] args) {
-        Hero h1 = new Hero("ミナト");
-        Sword s = new Sword("はがねの剣");
-        h1.setSword(s);
-        System.out.println("装備:" + h1.getSword());
-        System.out.println("clone()で複製します");
-        Hero h2 = h1.clone();
-        System.out.println("コピーもとの勇者の剣の名前を変えます");
-        h1.getSword().setName("ヒノキの棒");
-        System.out.println("コピー元とコピー先の勇者の装備を表示します");
-        System.out.println("コピー元:" + h1.getSword().getName() + "/コピー先:" + h2.getSword().getName());
-        // 両方のインスタンスがヒノキの棒を持っている!!
-        // Heroインスタンスは複製できたが、swordは参照がコピーされただけ
-        // → 浅いコピー
+        // Object型変数dataに値が格納された瞬間、
+        // その情報が元々Stringインスタンスであったことは忘れ去られるため
+        // キャストしなおさないといけなくなる
+        Pocket p = new Pocket();
+        p.put("1192");
+        String s = (String) p.get();
+        System.out.println(s);
+
+        Account a = new Account("172637482", FUTSU);
 
 
 

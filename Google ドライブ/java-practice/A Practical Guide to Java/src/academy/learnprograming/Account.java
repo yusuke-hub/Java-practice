@@ -1,7 +1,15 @@
 package academy.learnprograming;
 
 public class Account {
+    private String accountNo;
+    private int balance;
+    private AccountType accountType;
     int number;
+
+    public Account(String accountNo, AccountType aType) {
+        this.accountNo = accountNo;
+        this.accountType = aType;
+    }
 
     //        List<Account> list = new ArrayList<Account>();
     //        ...
