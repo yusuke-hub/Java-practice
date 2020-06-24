@@ -2,6 +2,9 @@ package academy.learnprograming;
 // static import宣言を行うことで、
 // 列挙子以外にもstaticがついたクラスメンバについて
 // 記述の省略を可能にする
+import java.util.function.IntBinaryOperator;
+import java.util.function.*;
+
 import static academy.learnprograming.AccountType.FUTSU;
 
 class Sword {
@@ -155,10 +158,54 @@ public class Main {
         // 変数名 = インスタンス変数名::そのインスタンスのメソッド名
 
         // 宣言したインターフェースの方に代入
-        MyFunction func = Main::sub;
+        // MyFunction func = Main::sub;
         // Mainクラスのsubメソッドではなく、インターフェースのメソッドで呼び出し
-        int a = func.call(5, 3);
-        System.out.println("5-3ja" + a);
+        // int a = func.call(5, 3);
+        // System.out.println("5-3ja" + a);
+
+        // 左辺が実行された瞬間、関数の実態が生み出される
+        // IntBinaryOperator func = (int a, int b) -> { return a ? b; };
+        // int a = func.applyAsInt(5, 3);
+        // System.out.println("5-3は" + a);
+
+        // ★ラムダ式
+        // 関数（ある入力を受け取り、出力を返す一連の処理ロジック）を、
+        // プログラム実行中の必要になったタイミングで生み出して即時利用することができる
+            // (型 引数名1, 型 引数名2,...) -> {
+            //  処理1;
+            //  処理2;...
+            //  return 戻り値;
+            //  }
+                // ex1, 勇者インスタンスを受け取り、そのHPを返す
+                    // (Hero h) -> {return h.getHp();}
+                // ex2, 何も受け取らず、現在日時を返す
+                    // () -> { return new java.util.Date(); }
+                // ex3, long配列を受け取り、そのコピーを作り、内容を並び替えて返す
+                    // (long[] array) -> {
+                    //    long[] array2 = java.util.Arrays.copyOf(array, array.length);
+                    //    java.util.Arrays.sort(array2);
+                    //    return array2;
+                    // }
+                // ex4, 関数オブジェクトを受け取り、2回呼び出した合計を返す
+                    //  (IntBinaryOperator func, int a, int b) -> {
+                    //    int result = func.applyAsInt(a, b) + func.applyAsInt(a, b);
+                    //    return result;
+                    //  }
+                        // *省略記法
+                            // IntToDoubleFunction func = (int x) -> { return x * x * 3.14; }
+                            // IntToDoubleFunction func = (x) -> { return x * x * 3.14; }
+                            // IntToDoubleFunction func = x -> { return x * x * 3.14; }
+                            // IntToDoubleFunction func = x -> return x * x * 3.14;
+                        // *応用
+                            // ラムダ式の外にある変数を利用することができる
+                            // 外にある変数を式の中で書き換えることはできないので注意
+                            // double b = 1.41;
+                            // IntToDoubleFunction func = (x) -> {
+                            //   return x * x * b;
+                            //  }
+
+
+
     }
 
 
