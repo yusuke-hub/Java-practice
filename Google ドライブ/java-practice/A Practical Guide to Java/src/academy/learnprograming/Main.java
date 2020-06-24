@@ -135,6 +135,10 @@ class Pocket<E> {
     }
 }
 public class Main {
+    public static int sub(int a, int b) {
+        return a - b;
+    }
+
     public static void main(String[] args) {
         // Object型変数dataに値が格納された瞬間、
         // その情報が元々Stringインスタンスであったことは忘れ去られるため
@@ -144,12 +148,18 @@ public class Main {
         String s = (String) p.get();
         System.out.println(s);
 
-        Account a = new Account("172637482", FUTSU);
+        Account ac = new Account("172637482", FUTSU);
 
+        // ★変数へのメソッド参照の格納
+        // 変数名 = クラス名::そのクラスの静的メソッド名
+        // 変数名 = インスタンス変数名::そのインスタンスのメソッド名
 
-
+        // 宣言したインターフェースの方に代入
+        MyFunction func = Main::sub;
+        // Mainクラスのsubメソッドではなく、インターフェースのメソッドで呼び出し
+        int a = func.call(5, 3);
+        System.out.println("5-3ja" + a);
     }
-
 
 
 
