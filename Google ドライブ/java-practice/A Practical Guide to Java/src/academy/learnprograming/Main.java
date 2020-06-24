@@ -20,6 +20,14 @@ class Hero {
     public String toString() {
         return "勇者(名前=" + this.name + "/HP=" + this.hp + "/MP=" + this.mp + ")";
     }
+
+    
+    public int hashCode() {
+        int result = 37;
+        result = result * 31 + name.hashCode();
+        result = result * 31 + hp;
+        return result;
+    }
 }
 public class Main {
     public static void main(String[] args) {
