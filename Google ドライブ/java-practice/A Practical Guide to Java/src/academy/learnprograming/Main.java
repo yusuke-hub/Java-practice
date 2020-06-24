@@ -4,33 +4,31 @@ import java.util.*;
 
 class Hero {
     public String name;
+    private int hp, mp;
+
+    // ★Objectクラスによる効能
+    // 1, 全クラスは、Objectクラスで定義されたメソッドを持っていることが保証される
+    // 2, Object型変数は、あらゆるインスタンスを代入可能である
+        // ●多くのインスタンスに共通して行える5つのメソッド
+        // 1, toString() 文字列表現をえる
+        // 2, equals() 等価判定を行う
+        // 3, hashCode() ハッシュ値を得る
+        // 4, compareTo() 大小関係を判定する
+        // 5, clone() 複製する
+
+    // 新たにクラスを作ったら、適切な文字列表現を返すようオーバーライドを忘れずに行う
+    public String toString() {
+        return "勇者(名前=" + this.name + "/HP=" + this.hp + "/MP=" + this.mp + ")";
+    }
 }
 public class Main {
     public static void main(String[] args) {
-        // ★参照の落とし穴
-            // 変数hやリストに格納された値が実際には参照であり、
-            // Heroインスタンスが生まれた時点で、そのメモリ上の番地がhに代入されている
-            // コレクションへ格納が終わった変数のインスタンスの中身を書き換えると、
-            // コレクションに格納済みの要素の中身も書き変わってしまう
+        Hero a = new Hero();
+        System.out.println(a); // toStringメソッドを定義していない場合 → academy.learnprograming.Hero@5a39699c
 
-            //*注意点
-                // Heroのように自分で作るクラスをコレクションに格納する場合、とても重要なことがある
-                    // equals()/hashCode()を正しくオーバーライドしていないと、
-                    // コレクションは正しく動作せず、原因の特定が困難な不具合につながることがある
-                // 古参のコレクションクラス、VectorやHashableは
-                // ArrayListやHashMapに劣るので、特別な事情がない限り使用しない
-        // CollectionsクラスとArraysクラス
-            // java.util.Collections: コレクション操作関連の便利なメソッド集
-            // java.util.Arrays: 配列操作関連の便利なメソッド集
-        
-        Hero h = new Hero();
-        h.name = "ミナト";
-        List<Hero> list = new ArrayList<Hero>();
-        list.add(h);
-        h.name = "スガワラ";
-        System.out.println(list.get(0).name);
-        System.out.println(list.hashCode()); // 1513712059;
     }
+
+
 
 
 
