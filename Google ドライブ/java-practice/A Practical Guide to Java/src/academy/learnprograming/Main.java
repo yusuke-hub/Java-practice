@@ -2,6 +2,8 @@ package academy.learnprograming;
 // static import宣言を行うことで、
 // 列挙子以外にもstaticがついたクラスメンバについて
 // 記述の省略を可能にする
+import java.util.Iterator;
+import java.util.Properties;
 import java.util.function.IntBinaryOperator;
 import java.util.function.*;
 
@@ -204,8 +206,72 @@ public class Main {
                             //   return x * x * b;
                             //  }
 
+        // ★System.exit()メソッド
+        // 引数にはint型の数字を入れることができ、
+        // 0は正常終了、それ以外は異常終了を意味する
+            // if(データが正しくないなら) {
+            //   System.out.println("データが壊れています。異常終了します");
+            //   System.exit(1);
+            // }
 
+        // ★Process Builder
+        // 計算が完了したら、メモ帳を起動するプログラム
+        // System.out.println("計算を開始します");
+        // ...
+        // System.out.println("計算完了。結果をメモ帳で表示します")
+        // コンストラクタは、幾つでも文字列を渡せる可変長変数になっており、
+        // 起動するプログラムファイルや起動引数を指定する
+        // ProcessBuilder pb = new ProcessBuilder(
+            //      "c:¥¥windows¥¥system32¥¥notepad.exe",
+            //      "calcreport.txt"
+            // );
+        // start()メソッドの戻り値として得られるProcessインスタンスを用いて、
+        // 起動したプログラムの終了をまったり、その終了コードを得ることができる
+            // pb.start();
 
+        // ★システムプロパティ
+        // 私たちがプログラム中で宣言、生成するmapとは別に、実はJVM自信も内部に
+        // Map<String, String>を持っていて、JVMの動作に関する様々な情報を格納、利用している。
+        // このJVMが持つ、文字列ペアの集合をシステムプロパティと呼ぶ。
+            // java.version   実行中のJREのバージョン
+            // java.home      実行中のJavaのインストール先のディレクトリ
+            // os.name        動作中のOSの名前
+            // line.separator 動作中のOSの改行コード
+            // user.name      実行したユーザーの名前
+
+        // ●システムプロパティの取得
+        System.out.println("ご利用のJavaのバージョン");
+        System.out.println(System.getProperty("Java.version"));
+        Properties properties = System.getProperties();
+        Iterator<String> i = properties.stringPropertyNames().iterator();
+        System.out.println("【システムプロパティ一覧】");
+        while(i.hasNext()) {
+            String key = i.next();
+            System.out.print(key + " = ");
+            System.out.println(System.getProperty(key));
+        }
+        // ●環境依存を排除する
+        // Javaの大きな強みは、JVMが動作するなら
+        // どのようなOSでも同様に動作することであるが、100%ではない
+        // 開業に関連する特殊文字はOSによって、違いがある
+        // 以下がその例
+            // System.out.println("本日は¥晴天なり");
+                // 実行結果
+                    // Linux
+                        // 本日は
+                        // 晴天なり
+                    // 古いMacOS
+                        // 本日は晴天なり
+        // 「line.separotr」システムプロパティで改善
+            // 現在動作中のOSが採用している開業コードが自動的に格納される
+            final String BR = System.getProperty("line.separator");
+            System.out.println("本日は" + BR + "晴天なり");
+
+        // ●システムプロパティの設定
+        String ver = System.getProperty("rpg.version");
+        String author = System.getProperty("rpg.author");
+        System.out.println("RPG: スッキリ魔王征伐 ver be" + ver);
+        System.out.println("Developed by " + author);
     }
 
 
