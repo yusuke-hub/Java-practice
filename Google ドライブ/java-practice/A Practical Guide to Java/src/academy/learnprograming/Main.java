@@ -451,6 +451,121 @@ public class Main {
                         //  /* ここでlineの内容を利用した処理 */
                         // }
 
+            // ★ データフォーマット
+            //  複数のデータをどのような形式、順序で保存するかということを定めたルール
+            //  分業開発を行う上では、明確に文書化しておくべきもの
+            //  きちんとデータフォーマットが決められ、書き込み処理と読み込み処理の双方で遵守されていなければ、
+            //  ファイルの読み書きを正しく行うことはできない
+                // ● ファイルフォーマット
+                //  ファイルのデータ構造を規定するもの
+                // ● メッセージフォーマット(電文フォーマット)
+                //  ネットワーク経由で伝送される一塊りのメッセージのデータ構造を規定するもの
+                    // public void saveHeroToFile(Hero h) throws IOException {
+                    //  Wrtier w = new BufferedWriter(new FileWriter("rpgsave.dat");
+                    //  w.write(h.name + "¥n");
+                    //  w.write(h.hp + "¥n");
+                    //  w.write(h.mp + "¥n");
+                    //  w.fllush();
+                    //  w.close();
+                    // }
+
+                // ● CSV(Comma-Separated Values)
+                //  複数のデータを間まで区切って順に格納するデータフォーマット
+                //  汎用性の高いフォーマットだが、
+                //  データ自体にカンマ記号が含まれる場合や
+                //  改行の取り扱いに注意が必要
+                //  より厳密なCSVの操作には、「opencsv」「OrangeSignalCSV」がオススメ
+                    // ◯ デリミタ
+                    //  データを区切るために使う文字
+                        // bw.write(h.name);
+                        // bw.write(",");
+                        // bw.write(h.hp);
+                        // bw.write(",");
+                        // bw.write(h.mp);
+                            // ⚫ ︎StringTokenizerクラス
+                            //  指定したデリミタで文字列を分割し、それぞれのデータ(トークン)
+                            //  を順次取得する機能を提供する
+                                // String s = "ミナト、アサカ, スガワラ";
+                                // StringTokenizer st = new StringTOkenizer(s, ",");
+                                // while(st.hasMoreTokens()) {
+                                //  String t = st.nextTokens();
+                                //  System.out.println(t);
+                // ★ プロパティファイル
+                    //  データは文字列情報として保存する
+                    //  各行には「キー」「値」をペアとして、それらを「ペアデリミタ」
+                    //  で区切って記述する
+                    //  ペアデリミタは=(イコール)、;(コロン)、空白のいずれかの文字
+                    //  #(シャープ)、!(感嘆符)で始まる行はコメントとして無視される
+                    //  ファイルの拡張子には「.properties」
+
+                        // ● 読み込み
+                            //  Reader fr = new FileReader("c:¥¥rpgdata.properties");
+                            //  Properties p = new Properties();
+                            //  ファイルの内容を読み込む
+                            //  p.load(fr);
+                            //  キーを指定し値を取り出す
+                            //  String name = p.getProperty("heroName");
+                            //  String strHp = p.getProperty("heroHp");
+                            //  int hp = Integer.parseInt(strHp);
+                            //  System.out.println("勇者の名前:" + name);
+                            //  System.out.println("勇者のHP:" + hp);
+                            //  fr.close();
+                        // ● 書き込み
+                            //  Writer fw = new File Writer("c:¥¥rpgsave.properties");
+                            //  Properties p = new Properties();
+                            //  データのセットを行う
+                            //  p.setProperty("heroName", "アサカ");
+                            //  p.setProperty("heroHp", "32");
+                            //  p.setProperty("heroMp", "45");
+                            // "勇者の情報"はファイルの先頭にコメントとして出力される
+                            // setProperty()を呼び出すだけではファイルに書き込まれないので
+                            // 必ずstore()を呼び出して、保存する!
+                            //  p.store(fw, "勇者の情報");
+                            //  fw.close();
+                                // ◯ getResourceAsStream()メソッド
+                                //  クラスパスを基準とした指定でファイルを開くことができるメソッド
+                                //  実行環境のフォルダの構成の違いに影響されにくいプログラムを作りたい場合に有効
+                                    //  InputStream is = Main.class.getResourceAsStream("¥¥rpg¥¥rpgsave.dat");
+
+
+                // ★ XML(Xtensible Markup Language)形式
+                //  データの内容に親子関係の構造がある場合に用いる
+                //  不等号記号で囲まれたラベルの中にデータを記述するフォーマットであり、
+                //  タグの中に別のタグをネストさせ、親子関係の構造にすることも可能
+                    // ● JAXP(Java API for XML Processing)
+                    //  javax.xml.parsersパッケージやorg.w3c.domパッケージなどから構成される、比較的複雑なAPI
+                        //  InputStream is = new FileInputStream("c:¥¥rpgsave.xml");
+                        // ① 文書全体を取得
+                        //  Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+                        // ② 一番外側のheroタグを取得
+                        //  Element hero = doc.getDocumentElement();
+                        // ③ その中のweaponタグを取得
+                        //  Element weapon = findChildByTag(hero, "weapon");
+                        // ④ その中のpowerタグを取得
+                        // Element power = findChildByTag(weapon, "power");
+                        // ④ その中の文字列情報を取得
+                        // String value = power.getTextContent();
+
+                        // static Element findChildByTag(Element self, String name)
+                        //      throws Exception {
+                        //  全ての子を取得
+                        //  NodeList children = self.getChildNodes();
+                        //  for(int i = 0; i < childrengetLength(); i++) {
+                        //      if(children.item(i) instanceof Element) {
+                        //          Element e = (Element) children.item(i);
+                        //  タグ名を照合
+                        //          if(e.getTagName().equals(name)) {
+                        //              return e;
+                        //          }
+                        //      }
+                        //  }
+                        //  return null;
+                        // }
+                            // ◯ JSON(JavaScript Object Nortation)
+                            //  ブラウザの上で動作するJavaScriptで利用されていたデータフォーマットだが、
+                            //  XMLに比べてデータ量が少なくて済むなど、様々な長所を持つことから
+                            //  近年広く使われている
+
         }
 
 
