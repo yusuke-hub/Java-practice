@@ -247,7 +247,7 @@ public class Main {
         System.out.println("【システムプロパティ一覧】");
         while(i.hasNext()) {
             String key = i.next();
-            System.out.print(key + " = ");
+             System.out.print(key + " = ");
             System.out.println(System.getProperty(key));
         }
         // ●環境依存を排除する
@@ -272,7 +272,108 @@ public class Main {
         String author = System.getProperty("rpg.author");
         System.out.println("RPG: スッキリ魔王征伐 ver be" + ver);
         System.out.println("Developed by " + author);
-    }
+
+        // ★ FileWriterを用いたサンプルコード
+            // FileWriterのインスタンス化
+            // * 第一引数に文字列を指定する場合、フォルダ区切りの¥記号を2つにする!
+            // * 第二引数がtrue → すでにファイルが存在していた場合、その末尾にデータを追記していく
+            //            false, 省略 → ファイルの先頭からデータを上書きしていく
+                // FileWriter fw = new FileWriter("c:¥¥rpgsave.dat", true);
+
+            // バッファという仕組みにより、ファイルの読み書きを高速化するために、
+            // 後でまとめて書き込み処理がされることがある
+            // writeメソッドはデータの書き込みを要求するだけの命令であり、
+            // すぐにファイルがデータに書き込まれるとは限らないため、
+            // ファイルを閉じる前に、flush()を呼び出すことで、
+            // JVMに対して、「今までに書き込み依頼したデータで、
+            // 実際には書き込んでいない部分があれば、今すぐ書き出せ！」指示をする
+                // fw.write('A);
+                // fw.flush();
+                // fw.close();
+
+        // ★ FileReaderを用いたサンプルコード
+            // FileReader
+                // ファイルの先頭から1文字ずつデータを読み込んでいく
+                    // FileReader fw = new FIleReader("rpgsave.dat");
+
+            // System.out.println("全てのデータを読み込んで表示します");
+            // read()により、ファイルから1文字を読み込む際、
+            // char型ではなく、int型として返されている!!
+                // もし「ファイルの最後まで読み終わってしまい、もうこれ以上読むデータがない」場合
+                // その事実を呼び出し元に伝えなければならず、その場合、-1を返すことになる
+                // しかしchar型では-1という数値は返せないため、苦肉の策としてint型で返す
+                    // int i = fw.read();
+
+            // while(i != -1) {
+                    //  char c = (char) i;
+            //  System.out.println(c);
+            //  i = fw.read();
+            // }
+            // System.out.println("ファイルの末尾に到達しました");
+            // fw.close();
+
+        // ★ バイナリファイルの読み書き
+            // ● テキストファイル
+            //  文字列として解釈可能なデータ(文字列)
+            //  FileReader,FileWriter
+                //  FileWriterは引数で与えられた文字をバイト表現に変換してファイルに書き込む
+                //  FileReaderもファイルから読んだバイト表現を文字列情報に変換して返す
+            // ● バイナリファイル
+            //  文字とは解釈できないデータ(バイト列)
+            //  FileInputStream(読み込み),FileOutputStream(書き込み)
+                // FileOutputStream fos = new FileOutputStream("rpgsave.dat", true);
+                // fos.write(65);
+                // fos.flush();
+                // fos.close();
+
+        // ★ 日本語と文字コード体系
+            //  日本人は、英語圏の人々と異なり、
+            //  アルファベットの小文字と大文字、数字、各種記号以外にも、
+            //  平仮名、カタカナ、漢字などたくさんの種類の文字を使う
+            //  これらの文字は1バイトでは表現できないため、
+            //  日本では、「基本的に2バイトを使って、1文字を表現する」方式を採用した
+            //  ところがいろんな人が異なるルールを提唱したため
+            //  統一されず現在に至っている
+                // JIS,ShiftJIS,EUC,UTF-8など..
+                    // ❇︎ FileReadereやFileWriterでは、システム標準の文字コード体系が利用される
+
+        // ★ 恐ろしいファイルの閉じ忘れ
+        //  ファイル操作を行う場合に、陥りやすい
+        //  そして実際に陥ると致命的な不具合に繋がる落とし穴がある
+            // close()をきちんと記述していても、
+            // 直前の処理で例外が発生し、強制終了といったことが発生する
+
+                //★ 正しく例外処理を行うプログラム1 ← やや冗長ではある
+                    // FileWriter fw = null;
+                    // try {
+                    //      fw = new FileWriter("rpssave.dat", true);
+                    //      fw.write('A');
+                    //      fw.flush();
+                    // } catch(IOException e) {
+                    //     System.out.println("ファイル書き込みエラーです");
+                // close()は、一度tryブロックの処理が行われたら、その後に何があっても
+                // （途中でreturnしても、例外が発生しても)必ず実行される」
+                //  finallyブロックに記述する
+                  // close()がIOEXceptionを創出する可能性があるため、
+                  // 再度try-catchが必要。ただし失敗しても何もできないため
+                  // catchブロック内は空にしてある
+                    // } finally {
+                    //   if(fw != null) {
+                    //     try {
+                    //       if(fw != null) {
+                    //         fw.close();
+                    //       }
+                    //     } catch(IOException e2) { }
+                    //   }
+
+                //★ 正しく例外処理を行うプログラム2 ← エレガントな記述
+                    // try(FileWriter fw = new FileWriter("rpgsave.dat");) {
+                    // /* 正常処理 */
+                    // } catch(IOEXception e) {
+                    // /* 例外処理 */
+                    // }
+
+        }
 
 
 
