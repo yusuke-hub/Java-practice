@@ -373,6 +373,84 @@ public class Main {
                     // /* 例外処理 */
                     // }
 
+        // ★ ストリーム
+        //  一度にまとめてファイルを読み込んでしまうと、メモリ不足や処理に長時間かかる
+        //  などの不都合が生じるため、外部データは少しずつ 読んだり書いたりするのが基本
+        //  単なるデータの読み書きを小川として抽象的に捉えることで、様々な応用や発展が考えられる
+            // 文字ストリーム
+            // バイトストリーム
+                // 標準出力
+                    // System.out
+                // 標準エラー出力
+                    // System.err
+                        // 標準入力
+                            // System.in
+
+        // ★ StrinReaderクラス
+        // 通常ストリームはJVM外部のデータあを少しずつ読み書きする際に利用しますが、
+        // JVM内部の変数の読み書きにも応用できる
+            // throwsで例外処理を省略しているので、実際の開発では正しく例外処理を行うこと！
+                // public static void main(String[] args) throws IOException {
+                // String msg = "第一土曜";
+                // Reader sr = new StringBUilder(msg);
+                // char c1 = (char) sr.read();
+                // char c2 = (char) sr.read();
+                // ...
+                // }
+        // ★ ByteArrayOutputStreamクラス
+        //  バイト配列に対して1バイトずつ、順次書き込んでいく
+        //  書き込み完了したところで、toByteArray()メソッドを呼び出せば、バイト配列が得られる
+                // public static void main(String[] args) throws IOException {
+                    // ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    // baos.write(65);
+                    // baos.write(66);
+                    // byte[] data = baos.toByteArray();
+                    // ...
+                // }
+
+        // ★ フィルタ
+        //  流れるデータに対して、多種多様な変換を行うことができるもの
+            // ● 特徴
+            // 1, Filter~クラスを継承している
+            // 2, 単独で存在できず、他に接続する形で生成する
+                // まず通常のファイル出力ストリームfosを生成
+                    // FileOutputStream fos = new FileOutputStream("data.txt");
+                // このストリームを下流に持つ暗号化ストリームcosを生成し接続
+                    // CipherOutputStream cos = new CipherOutputStream(fos);
+                // cosに書き込めば、暗号化された上で、ファイルに流れていく
+                    // cos.write(65);
+            // 3, フィルタを複数連結することもできる
+                // まず通常のファイル出力ストリームfosを生成
+                    // FileOutputStream fos = new FileOutputStream("data.txt");
+                // このストリームを下流に持つ暗号化ストリームcosを接続
+                    // CipherOutputStream cos = new CipherOutputStream(fos);
+                // さらに文字バイト変換をするストリームwosを接続
+                    // WriterOutputStream wos = new WriterOutputStream(cos);
+                // wos２文字を書き込めば、バイト変換 & 暗号化が実行され、ファイルに流れていく
+                    // wos.write("AB");
+
+            // ● バッファリングフィルタ
+                // 上流から少しずつ流れてくるデータを溜め込み、
+                // まとまった量になったところで一気に下流に流す仕事をしてくれる
+                    // 文字情報用: BufferedReader, BufferedWriter
+                    // バイト情報用: BUfferedInputStream, BufferedOutputStream
+                // ◯ メリット
+                    // 1, 処理性能の向上
+                        // ファイルを保存するために何気なく李硫黄しているハードディスクは、
+                        // メモリに比べて大容量ではあるものの読み書きの速度が遅いという欠点がある
+                        // ファイルの読み書きを要求するたびに、
+                        // ハードディスク内部のヘッドという機械が動いて、
+                        // ディスク上のデータに対して読み書きを行う
+                            // 少量のデータを何度も書き込む要求をするより、データを一まとめにして
+                            // 1回の書き込みを要求する方が圧倒的に早く処理が完了する
+                    // 2, まとまった単位でデータを読める
+                        // FileReader fr = new FileReader("rpgsave.dat");
+                        // BufferedReader br = new BufferdReader(fr);
+                        // String line = null;
+                        // while((line = br.readLine()) != null) {
+                        //  /* ここでlineの内容を利用した処理 */
+                        // }
+
         }
 
 
