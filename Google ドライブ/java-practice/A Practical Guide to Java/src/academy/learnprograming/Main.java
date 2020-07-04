@@ -2,6 +2,7 @@ package academy.learnprograming;
 // static import宣言を行うことで、
 // 列挙子以外にもstaticがついたクラスメンバについて
 // 記述の省略を可能にする
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.function.IntBinaryOperator;
@@ -565,6 +566,69 @@ public class Main {
                             //  ブラウザの上で動作するJavaScriptで利用されていたデータフォーマットだが、
                             //  XMLに比べてデータ量が少なくて済むなど、様々な長所を持つことから
                             //  近年広く使われている
+
+                // * ファイル保存に関する不満
+                //  RPGのセーブデータのようなものは
+                //  「ファイルに保存したら、次に読み込むまで人間が読んだ理変種したりする必要はないもの」
+                //  プログラマは各データが具体的にどのような形式で格納されるかなど
+                //  気にする必要はないし、できれば気にしたくはない
+                //  Q, 形式はどうでもいいから、勇者インスタンスの
+                //  全フィールドを丸ごとファイルに保存しておくみたいな命令はないか？
+
+                //  → ● 直列化(serialization)
+                    // あるインスタンスの内容(全フィールド)を
+                    // 1つの命令呼び出しで丸ごとそのままバイト列に変換したり、
+                    // その逆にバイト列をインスタンスに戻したりする
+                        // 直列化に対応したHeroクラス
+                            // public class Hero implements Serializabale {
+                            //  private String name; private int hp; private int mp;
+                            //  ...
+                            // }
+
+                        // 勇者インスタンスを保存し、復元する
+                            // Hero hero1 = new Hero("ミナト", 75, 18);
+                            // ① インスタンスの直列化と保存
+                            // FileOutputStream fos = new FileOutputStream("c:¥¥rpgsave.dat");
+                            // ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            // インスタンスをバイト列に変換する
+                            // oos.writeObject(hero1);
+                            // oos.flush();
+                            // oos.close();
+                            // ② ファイルからインスタンスを復元
+                            // FileInputStream fis = new FileInputStream("c:¥¥rpgsave.dat");
+                            // ObjectInputStream ois = new ObjectInputStream(fis);
+                            // バイト列をインスタンスに変換する
+                            // Hero hero2 = (Hero) ois.readObject();
+                            // ois.close();
+                    // Javaの直列化機構では、基本的にオブジェクトが持つ全てのフィールドを直列化の対象とする。
+                    // 特に「クラス型のフィールドについても、もし直列化が可能であれば連鎖的に直列化する」
+                    // という動作は強力。ただ例外もあるので注意
+                        // 1, Serializableを実装していないクラス型のフィールドは直列化の対象にならない
+                        // 2, staticがついたフィールドは直列化の対象にならない
+                        // 3, transient(一時的な)キーワードで就職したフィールドは直列かの対象にならない
+                            // * インスタンスを直列化してファイルに保存した後、RPGのプログラムが改良され、
+                            // クラス自体にもいくつかフィールドが追加、削除された。
+                            // この状態で改良前に、直列化で保存したファイルから勇者インスタンスを復元しようとすると
+                            // 矛盾した状態で復元されてしまうことがある。
+                                // ◯ シリアルバージョンUID
+                                //  あらかじめクラスフィールドで宣言しておく。数値はどんな値でも構わないが、
+                                //  クラス設計が変化した場合は、値を必ず修正する.
+                                //  こうすることで、矛盾した状態で復元されそうになった場合に、それをJVMが検知し、例外を発生するようになる
+            StringBuilder sb = new StringBuilder();
+            for(int i3 = 0; i3 < 100; i3++) {
+                sb.append(i3+1).append(",");
+            }
+            String str = sb.toString();
+            String[] a = str.split(",");
+            System.out.println(Arrays.toString(a));
+
+            String folder;
+            String file;
+            if(folder.matches("^c:¥.+¥$") && file != null) {
+
+            }
+
+
 
         }
 

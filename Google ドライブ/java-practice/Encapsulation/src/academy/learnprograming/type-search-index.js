@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"academy.learnprograming","l":"EnhancedPlayer"},{"p":"academy.learnprograming","l":"Main"},{"p":"academy.learnprograming","l":"Player"},{"l":"すべてのクラス","url":"allclasses-index.html"}]
