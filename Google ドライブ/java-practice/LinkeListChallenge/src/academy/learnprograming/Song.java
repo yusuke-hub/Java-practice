@@ -17,7 +17,38 @@ package academy.learnprograming;
 
 public class Song {
     String title;
-    int playingTime;
+    String fixedPlayTime;
+    int fixingPlayTime;
+
+    public Song(String title, int playingTime) {
+        this.title = title;
+        this.fixingPlayTime = playingTime;
+        this.fixedPlayTime = fixingPlayTime / 60 + ":" + fixingPlayTime % 60;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getFixedPlayTime() {
+        return fixedPlayTime;
+    }
+
+    public int getFixingPlayTime() {
+        return fixingPlayTime;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setFixedPlayTime(String fixedPlayTime) {
+        this.fixedPlayTime = fixedPlayTime;
+    }
+
+    public void setFixingPlayTime(int fixingPlayTime) {
+        this.fixingPlayTime = fixingPlayTime;
+    }
 
     public int compareTo(Song newSong) {
         if(this.equals(newSong)) {

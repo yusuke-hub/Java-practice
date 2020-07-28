@@ -23,6 +23,11 @@ import java.util.ListIterator;
 public class Album {
     LinkedList<Song> playList = new LinkedList<Song>();
 
+
+    public Album(LinkedList<Song> playList) {
+        this.playList = playList;
+    }
+
     public static boolean add(LinkedList<Song> playList, Song newSong) {
         ListIterator<Song> playListIterator = playList.listIterator();
 
@@ -36,6 +41,7 @@ public class Album {
             }
         }
         playListIterator.add(newSong);
+        play(playList);
         return true;
     }
 
@@ -60,11 +66,11 @@ public class Album {
                 int action = scanner.nextInt();
                 scanner.nextLine();
                 switch(action) {
-                    case 0:
+                    case 1:
                         System.out.println("停止");
                         quit = true;
                         break;
-                    case 1:
+                    case 2:
                         if(!goingForward) {
                             if(playListIterator.hasNext()) {
                                 playListIterator.next();
@@ -76,7 +82,7 @@ public class Album {
                             System.out.println("このプレイリストで最後の曲");
                         }
                         break;
-                    case 2:
+                    case 3:
                         if(goingForward) {
                             if(playListIterator.hasPrevious()) {
                                 playListIterator.previous();
@@ -88,10 +94,10 @@ public class Album {
                             System.out.println("このプレイリストで最初の曲");
                         }
                         break;
-                    case 3:
+                    case 4:
                         displayPlayList(playList);
                         break;
-                    case 4:
+                    case 5:
                         playListIterator.remove();
                         break;
                 }
@@ -102,7 +108,7 @@ public class Album {
 
     private static void displayPlayList(LinkedList<Song> playList) {
         for(int i=0; i < playList.size(); i++) {
-            System.out.println(i + " - " + playList.get(i).title + " / " + playList.get(i).playingTime);
+            System.out.println((i+1) + " - " + playList.get(i).title + " / " + playList.get(i).fixedPlayTime);
         }
     }
 
@@ -111,6 +117,7 @@ public class Album {
                 "1 - 再生中の曲を停止\n" +
                 "2 - 次の曲へスキップ\n" +
                 "3 - 前の曲へスキップ\n" +
-                "4 - プレイリストを表示");
+                "4 - プレイリストを表示\n" +
+                "5 - プレイリストから削除");
     }
 }
